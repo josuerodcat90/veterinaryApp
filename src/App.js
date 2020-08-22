@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Form from './components/Form';
 import Cita from './components/Cita';
 
 function App() {
-	const initialCitas = localStorage.getItem('citas');
+	let initialCitas = JSON.parse(localStorage.getItem('citas'));
+	if (!initialCitas) {
+		initialCitas = [];
+	}
 
-	const [citas, setCitas] = useState([]);
+	const [citas, setCitas] = useState(initialCitas);
+
+	useEffect(() => {
+		if (initialCitas) {
+			localStorage.setItem('citas', JSON.stringify(citas));
+		} else {
+			localStorage.setItem('citas', JSON.stringify([]));
+		}
+	}, [citas]);
 
 	const createCita = (cita) => {
 		setCitas([...citas, cita]);
