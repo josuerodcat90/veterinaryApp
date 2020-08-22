@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import PropTypes from 'prop-types';
 
 const Form = ({ createCita }) => {
 	const [cita, setCita] = useState({
@@ -128,6 +129,10 @@ const Form = ({ createCita }) => {
 			</form>
 		</>
 	);
+};
+
+Form.propTypes = {
+	createCita: PropTypes.func.isRequired,
 };
 
 export default Form;
